@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState, useEffect } from 'react'
+import NavBar from './component/NavBar'
 function App() {
+  const [ userLogin, setUserLogin ] = useState(false)
+  const handleToggle = () => {
+    console.log("inside handleToggle")
+    setUserLogin(!userLogin)
+  }
+  useEffect(() => {
+      if (localStorage.getItem('token')) {
+          handleToggle()
+      }
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h2>User Auth</h2>
+      <NavBar userLogin={userLogin} handleToggle={handleToggle}/>
     </div>
   );
 }
